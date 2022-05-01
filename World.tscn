@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World.gd" type="Script" id=2]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
+
+[sub_resource type="ProceduralSky" id=1]
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+background_sky = SubResource( 1 )
+background_color = Color( 0.501961, 0.6, 0.701961, 1 )
+ambient_light_energy = 0.0
+fog_enabled = true
+fog_sun_color = Color( 1, 0.901961, 0.701961, 1 )
+fog_sun_amount = 0.28
+fog_depth_end = 0.0
+fog_transmit_enabled = true
+glow_bloom = 0.2
+
+[node name="World" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0 )
+gravity_scale = 1.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.877247, 0.48004, 0, -0.48004, 0.877247, 0, 0, 0 )
+light_color = Color( 1, 0.901961, 0.701961, 1 )
+light_energy = 0.2
+shadow_enabled = true
+
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="StartTimer" to="HUD" method="_on_StartTimer_timeout"]
