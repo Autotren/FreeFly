@@ -2,6 +2,9 @@ extends Spatial
 
 export var flame_velocity = 10
 
+func _ready():
+	$Flame.emitting = false
+
 func _process(delta):
 	var flame_direction = Vector3()
 	flame_direction.x = 1 #atan2(abs($"../../Player".linear_velocity.y), flame_velocity)  # y axis
