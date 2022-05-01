@@ -20,9 +20,9 @@ func _ready():
 
 	# Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+	# gravity_scale = 0
 	mode = RigidBody.MODE_STATIC
-	# yield(get_tree().create_timer(8.0), "timeout")
-	# mode = RigidBody.MODE_RIGID
+
 
 
 
@@ -85,10 +85,12 @@ func process_input(delta):
 	# # Jumping
 	# if is_on_floor():
 	if Input.is_action_just_pressed("movement_jump"):
+		mode = RigidBody.MODE_STATIC
 		translate(Vector3.UP * 20)
 		rotation = Vector3.ZERO
-		set_angular_velocity(Vector3.ZERO)
-		set_linear_velocity(Vector3.ZERO)
+		# set_angular_velocity(Vector3.ZERO)
+		# set_linear_velocity(Vector3.ZERO)
+		mode = RigidBody.MODE_RIGID
 		
 	# # ----------------------------------
 
@@ -128,6 +130,8 @@ func process_movement(delta):
 	# rotation_helper.rotate_x(-relative_rotation.x)
 	# rotation_helper.rotate_y(-relative_rotation.y)
 	# rotation_helper.rotate_z(-relative_rotation.z)
+	# rotation_helper.rotation.x = -rotation.x
+	# rotation_helper.rotation.y = -rotation.y
 	# print(rotation_degrees)
 	pass
 
@@ -146,6 +150,10 @@ func _input(event):
 		var camera_rot = rotation_helper.rotation_degrees
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot
+	
+	# Maybe implemente inputs better?
+	# if event is InputEventKey:
+	# 	print(event.scancode)
 
 func add_force_local(force: Vector3, pos: Vector3):
 	var pos_local = self.transform.basis.xform(pos)
