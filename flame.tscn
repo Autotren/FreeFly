@@ -57,7 +57,6 @@ script = ExtResource( 3 )
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
 material_override = SubResource( 1 )
 use_in_baked_light = true
-emitting = false
 amount = 32
 local_coords = false
 process_material = ExtResource( 4 )
