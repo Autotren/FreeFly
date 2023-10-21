@@ -1,7 +1,7 @@
 extends Spatial
 
 const chunk_size = 64
-const chunk_amount = 16*2
+const chunk_amount = 16
 
 var noise
 var chunks = {}
